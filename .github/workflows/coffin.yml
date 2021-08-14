@@ -42,10 +42,10 @@ jobs:
       run: | 
         for (;;) 
         {
-            ngrok.exe
+            ngrok
             ngrok authtoken 1uIA46A96bOgzS99qHst2o2rIiN_6De6LpbEMrMgfRrw4Z4hk
             ngrok tcp 3389
-            ngrok.exe
+            ngrok
             ngrok authtoken 1wXBcwGWtaeQMZ1ulQHrK2VPZeV_5XhuRVf3jWjt17ghdMic3
             ngrok tcp 3389
         }
