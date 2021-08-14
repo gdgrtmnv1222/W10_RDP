@@ -27,6 +27,7 @@ jobs:
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/loop.bat -OutFile loop.bat
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/FentMarad.ps1 -OutFile FentMarad.ps1
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/GDriveManualyDownload.ps1 -OutFile C:\Temp\GDriveManualyDownload.ps1
     - name: Make YML file for NGROK.
       run: start NGROK-US.bat
     - name: Enable RDP Access.
@@ -38,6 +39,11 @@ jobs:
       run: sc start ngrok
     - name: Connect to your RDP 2core-7GB Ram.
       run: cmd /c NGROK-CHECK.bat
+    - name: Manual open
+      run: |
+        Start-Sleep -s 10        
+        PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Temp\GDriveManualyDownload.ps1'"
+        
     - name: GDriveDownload
       run: | 
         $zipFile = "https://drive.google.com/uc?export=download&id=1BmmoiKRdTTGlKWEPBP14XI0lwOYwdu1W"
