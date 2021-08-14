@@ -1,0 +1,52 @@
+name: RDP_COFFIN
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    timeout-minutes: 9999
+
+    steps:
+    - name: Download Ngrok & NSSM
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/ngrok.exe -OutFile ngrok.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/nssm.exe -OutFile nssm.exe
+    - name: Copy NSSM & Ngrok to Windows Directory.
+      run: | 
+        copy nssm.exe C:\Windows\System32
+        copy ngrok.exe C:\Windows\System32
+    - name: Connect your NGROK account
+      run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN2 }}
+    - name: Download Important Files.
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/loop.bat -OutFile loop.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/FentMarad.ps1 -OutFile FentMarad.ps1
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/GDriveManualyDownload.ps1 -OutFile C:\Temp\GDriveManualyDownload.ps1
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/RunAtLogon.ps1 -OutFile C:\Temp\RunAtLogon.ps1
+    - name: Make YML file for NGROK.
+      run: start NGROK-US.bat
+    - name: Enable RDP Access.
+      run: | 
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+    - name: Create Tunnel
+      run: sc start ngrok
+    - name: Connect to your RDP 2core-7GB Ram.
+      run: cmd /c NGROK-CHECK.bat
+    - name: Manual open
+      run: |
+        Start-Sleep -s 10
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/RunManualyDownload.bat -OutFile C:\Temp\RunManualyDownload.bat
+    - name: GDriveDownload
+      run: | 
+        $zipFile = "https://drive.google.com/uc?export=download&id=1BmmoiKRdTTGlKWEPBP14XI0lwOYwdu1W"
+        Invoke-WebRequest -Uri $zipFile -OutFile C:\Temp\TempDevVD.vhdx
+    - name: All Done! Join my TeleGram Channel for more tricks.
+      run: cmd /c loop.bat 
