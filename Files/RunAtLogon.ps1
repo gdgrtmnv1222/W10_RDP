@@ -1,3 +1,4 @@
+$env:COMPUTERNAME
 $Action=New-ScheduledTaskAction -Execute "C:\Temp\RunManualyDownload.bat"
 $Trigger=New-ScheduledTaskTrigger -AtLogOn
 $Set=New-ScheduledTaskSettingsSet
