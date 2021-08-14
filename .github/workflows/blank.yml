@@ -1,4 +1,4 @@
-name: RDP_COFFIN
+name: NoAutomate
 
 on: workflow_dispatch
 
