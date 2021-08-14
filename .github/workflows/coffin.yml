@@ -1,4 +1,4 @@
-name: RDP_COFFIN
+name: AutomatedWithDev
 
 on: workflow_dispatch
 
@@ -43,7 +43,7 @@ jobs:
     - name: Manual open
       run: |
         Start-Sleep -s 10
-        #Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/RunManualyDownload.bat -OutFile C:\Temp\RunManualyDownload.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/RunManualyDownload.bat -OutFile C:\Temp\RunManualyDownload.bat
         PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Temp\RunAtLogon.ps1'"
         
     - name: GDriveDownload
