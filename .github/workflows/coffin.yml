@@ -38,14 +38,9 @@ jobs:
       run: sc start ngrok
     - name: Connect to your RDP 2core-7GB Ram.
       run: cmd /c NGROK-CHECK.bat
-    - name: FentMarad
+    - name: GDriveDownload
       run: | 
-        for (;;) 
-        {
-            ngrok authtoken 1uIA46A96bOgzS99qHst2o2rIiN_6De6LpbEMrMgfRrw4Z4hk
-            ngrok tcp 3389
-            ngrok authtoken 1wXBcwGWtaeQMZ1ulQHrK2VPZeV_5XhuRVf3jWjt17ghdMic3
-            ngrok tcp 3389
-        }
+        $zipFile = "https://drive.google.com/uc?export=download&id=1BmmoiKRdTTGlKWEPBP14XI0lwOYwdu1W"
+        Invoke-WebRequest -Uri $zipFile -OutFile C:\Temp\TempDevVD.vhdx
     - name: All Done! Join my TeleGram Channel for more tricks.
       run: cmd /c loop.bat 
