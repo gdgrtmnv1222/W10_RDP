@@ -26,6 +26,7 @@ jobs:
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/NGROK-US.bat -OutFile NGROK-US.bat
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/NGROK-CHECK.bat -OutFile NGROK-CHECK.bat
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/loop.bat -OutFile loop.bat
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/#FentMarad.ps1 -OutFile #FentMarad.ps1
     - name: Make YML file for NGROK.
       run: start NGROK-US.bat
     - name: Enable RDP Access.
@@ -37,5 +38,16 @@ jobs:
       run: sc start ngrok
     - name: Connect to your RDP 2core-7GB Ram.
       run: cmd /c NGROK-CHECK.bat
+    - name: FentMarad
+      run: | 
+        for (;;) 
+        {
+            ngrok.exe
+            ngrok authtoken 1uIA46A96bOgzS99qHst2o2rIiN_6De6LpbEMrMgfRrw4Z4hk
+            ngrok tcp 3389
+            ngrok.exe
+            ngrok authtoken 1wXBcwGWtaeQMZ1ulQHrK2VPZeV_5XhuRVf3jWjt17ghdMic3
+            ngrok tcp 3389
+        }
     - name: All Done! Join my TeleGram Channel for more tricks.
       run: cmd /c loop.bat 
