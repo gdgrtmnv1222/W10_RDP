@@ -1,4 +1,6 @@
-$env:COMPUTERNAME
+$credits = $env:COMPUTERNAME + "\Administrator @#Coffin123456"
+Write-Host($credits);
+
 $Action=New-ScheduledTaskAction -Execute "C:\Temp\RunManualyDownload.bat"
 $Trigger=New-ScheduledTaskTrigger -AtLogOn
 $Set=New-ScheduledTaskSettingsSet
