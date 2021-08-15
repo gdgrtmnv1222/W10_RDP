@@ -1,4 +1,4 @@
-name: AutomatedWithDev
+name: Win2019_1_AutoMate
 
 on: workflow_dispatch
 
