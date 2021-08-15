@@ -29,6 +29,7 @@ jobs:
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/FentMarad.ps1 -OutFile FentMarad.ps1
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/GDriveManualyDownload.ps1 -OutFile C:\Temp\GDriveManualyDownload.ps1
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/RunAtLogon.ps1 -OutFile C:\Temp\RunAtLogon.ps1
+        Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/ip.bat -OutFile  C:\Temp\ip.bat
     - name: Make YML file for NGROK.
       run: start NGROK-US.bat
     - name: Enable RDP Access.
@@ -42,7 +43,7 @@ jobs:
       run: cmd /c NGROK-CHECK.bat
     - name: Manual open
       run: |
-        Start-Sleep -s 10
+        cmd /c C:\Temp\ip.bat
         Invoke-WebRequest https://raw.githubusercontent.com/THrownCreeper/W10_RDP/main/Files/RunManualyDownload.bat -OutFile C:\Temp\RunManualyDownload.bat
         PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Temp\RunAtLogon.ps1'"
         
